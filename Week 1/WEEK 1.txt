@@ -1,0 +1,356 @@
+﻿HEUTE IST MONTAG, 11 (elf) APRIL 2016
+
+Lesson 2 of 9
+
+SUPERVISED LEARNING
+
+Supervised Learning - "right answers" given
+
+Regression - Predict continuous valued output, such as prices
+
+Classification - Discrete valued output (0 or 1)
+
+Problem 1 - You have a large invetory of identical items. You want to predict how many of these items will sell over the next 3 mounths.
+
+Problem 2 - You'd like software to examine individual customer accounts, and for each account decide if it has been hacked/compromised.
+
+Treat problem 1 has a regression problem and problem 2 has a classification problem.
+
+
+UNSUPERVIDED LEARNING
+
+The data is not labeled or have the same label. So we give a data set to the software and we not told what to do with it and ask 'Can you find some structure in the data?'
+
+Clustering Algorithm - group a set of data. It can be used in: Organizing computer clusters; social network analysis; market segmentation; astronomical data analysis.
+
+Cocktail party problem: there is a party, room full of people, all siting around, all talking at the same time and there are all these overlapping voices because everyone is talking at the same time, and it is almost hard to hear the person in front of you. So maybe at a cocktail party with two people, two people talking at the same time, and we are going to put two microphones at different positions. The cocktail party algorithm separates the sound.
+
+
+Lesson 4 of 9
+
+What is Machine Learning?
+
+Arthur Samuel
+
+MACHINE LEARNING IS THE FIELD OF STUDY THAT GIVES COMPUTERS THE ABILITY TO LEARN WITHOUT BEING EXPLICITLY PROGRAMMED.
+
+Tom Mitchell
+
+A computer program is said to learn from experience E with respect to some class of tasks T and perfomance measure P, if its perfomance at tasks in T and perfomance measure P, if its perfomance at tasks in T, as measured by P, improves with experience E.
+
+
+Supervised Learning
+
+We are given a data set and already know what ou correct output should look like, having the idea that there is a relationship between the input and the output.
+
+Categories: 
+	Regression: trying to predict results within a continuous output, meaning that we are trying to map input variables to some continuous function.
+	Classification: trying to predict results in a discrete output. In other words, we are trying to map input variables into discrete categories.
+
+Unsupervided Learning
+
+Allows us to approach problems with little or no idea what our results should look like. We can derive structure from data.
+
+We can derive that structure by clustering the data based on relationships among the variables in the data.
+
+
+LINEAR REGRESSION WITH ONE VARIABLE
+
+Linear regression with one variable is also know as 'univariate linear regression'.
+
+It is used when you want to predict a single output value from a single input value.
+
+Our hypothesis function has the general form:
+
+hθ(x) = θ0 + θ1*x
+
+We give to hθ values for θ0 and θ1 to get our output Y.
+
+Example:
+
+x(input)	y(output)
+0		4
+1		7
+2		7
+3		8
+
+Now we can make a random guess about our hθ function: θ0 = 2 and θ1 = 2. The hypothesis function becomes hθ(x) = 2 + 2x. So for the input of 1 to our hypothesis, y will be 4. This is off by 3.
+
+We can measure tha accuracy of our hypothesis function by using a COST FUNCTION. This takes an average of all the results of the hypothesis with inputs from x's compared to the actual output y's.
+
+J(θ0,θ1)=1/2m*∑i=1~m(hθ(x(i))−y(i))2
+
+This function is otherwise called the "Squared error function" or Mean squared error.
+
+Now we are able to concretely measure the accuracy of our predictor function against the correct results we have so that we can predict new results we don't have.
+
+So we have our hyphotesis function and we have a way of measuring how accurate it is. Now we need a way to automatically improve our hyphotesis function. That's where GRADIENT DESCENT comes in.
+
+repeat until convergence:
+
+θj:=θj−α*∂J(θ0,θ1)/∂θj [Slope of tangent AKA derivative]
+
+Gradient Descent for Liner Regression
+
+repeat until convergence:
+{
+
+θ0:= θ0 − α*1/m * ∑i=1~m(hθ(x(i))−y(i))
+
+θ1:= θ1 − α*1/m * ∑i=1~m( ( hθ(x(i)) − y(i) ) * x(i) )
+
+
+}
+
+------------------------------------------------------------
+
+Heute ist Mittwoch, 13 April 2016
+
+Lesson 5 of 9
+
+MODEL REPRESENTATION
+
+Example used: Housing Prices
+
+It is a Supervided Learning example.
+* Given the 'right anwer' for each example in the data
+
+It is a Regression Problem.
+* Predict real-valued output
+
+OBS: Classification Problem: discrete-valued output
+
+
+In supervised learning we have a data set and this data set is called training set.
+
+NOTATION:
+m = Number of training examples
+x = 'input' variable / features
+y = 'output' variable / 'target' variable
+(x, y) - one training example
+(xi, yi) - the Ith training example
+
+Training Set -> Learning Algorithm -> h
+
+Size of house -> h -> Estimated price
+
+* Size of house - x
+* Estimated size - estimated value of y
+* h - hypothesis
+
+H maps from x's to y's
+
+How to represent h?
+
+hθ(x) = θ0 + θ1*x -> this is a Linear Regression with one variable ( univariate liner regression )
+
+
+COST FUNCTION
+
+hθ(x) = θ0 + θ1*x 
+
+θ0 and θ1 - Parameters
+
+The idea is choose θ0 e θ1 so that h(x) is close to y for our training examples (x,y)
+
+Minimize the sum of the square diference;
+ 
+J(θ0, θ1) = 1/2m * ∑i=1~m(h(x) - y)² - Cost Function or Squared Error Function
+
+* m - number of training examples
+
+Lesson 6 of 9
+
+GRADIENT DESCENT
+
+The problem:
+
+Have some function J(θ0, θ1)
+Want minθ0, θ1 for J(θ0, θ1)
+
+Outline:
+* Start with some θ0, θ1
+* Keep changing θ0, θ1 to reduce J(θ0, θ1) until hopefully end up at a minimum
+
+Gradient Descent Algorithm
+
+repeat until convergence {
+	θj := θj - α * dJ(θ0, θ1)/dθj for j = 0 and j = 1
+}
+
+* dJ(θ0, θ1)/dθj - Derivative
+* α - learning rate.
+
+Simultaneous update ( this is the correct way to do it )
+
+temp0 := θ0 - α * dJ(θ0, θ1)/dθ0
+temp1 := θ1 - α * dJ(θ0, θ1)/dθ1
+θ0 := temp0
+θ1 := temp1
+
+GRADIENT DESCENT FOR LINEAR REGRESSION
+
+
+dJ(θ0, θ1)/dθj = d/dθj * 1/2m * ∑i=1~m(h(xi) - yi)² = d/dθj * 1/2m * ∑i=1~m(θ0 + θ1*xi - yi)²
+
+j = 0 =>  dJ(θ0, θ1)/dθ0 = 1/m * ∑i=1~m(h(xi) - yi)
+j = 1 =>  dJ(θ0, θ1)/dθ1 = 1/m * ∑i=1~m(h(xi) - yi)*xi
+
+repeat until convergence {
+	θ0 := θ0 - α * 1/m * ∑i=1~m(h(xi) - yi)
+	θ1 := θ1 - α * 1/m * ∑i=1~m(h(xi) - yi)*xi
+}
+
+
+
+------------------------------------------------------------
+
+Heute ist Donnerstag, 14 April 2016
+
+Lesson 8 of 9
+
+MATRICES AND VECTORS
+
+|1 2 3|
+|4 5 6|  -> 2x3 or IR3x2
+
+matrix: row x columns
+
+Matrix elements - entries of matrix
+
+Aij = "i,j entry" in the ith row, jth column
+
+A11 = 1
+A12 = 2
+
+Vector - An n x 1 matrix
+
+|1|
+|2|
+|3|
+|4| - > 4 dimension vector or IR4
+
+yi = ith element
+
+ADDITION AND SCALAR MULTIPLICATION
+
+Addition
+
+|1 2 3|   |1 2 3|    |2 4  6 |	
+|4 5 6| + |4 5 6| =  |8 10 12|
+|7 8 9|   |7 8 9|    |14 16 18|
+
+A3x2 + A2x2 = ERROR
+
+Scalar multiplication/division
+
+    |1 2 3|   |2 4 6|
+2 * |4 5 6| = |8 10 12|
+    |7 8 9|   |14 16 18|
+
+
+------------------------------------------------------------
+
+Heute ist Freitag, 15 April 2016
+
+MATRIX VECTOR MULTIPLICATION
+
+
+A3x3 * A3x1 = A3x1
+
+m must be igual to o
+
+Anxm * Aoxp = Anxp
+
+|a11 a12 a13|   |b11|   |a11*b11 + a12*b21 + a13*b31|
+|a21 a22 a23| * |b21| = |a21*b11 + a22*b21 + a23*b31|
+|a31 a32 a33|   |b31|   |a31*b11 + a32*b21 + a33*b31|
+
+Example:
+
+House sizes:      Hypothesis: h(x) = -40 + 0.25x
+2104
+1416
+1534
+852
+
+|1 2104|            |-40*1 + 2104*0.25|
+|1 1416|   |-40 |   |-40*1 + 1416*0.25|
+|1 1534| x |0.25| = |-40*1 + 1534*0.25|
+|1 852 |            |-40*1 + 852*0.25 |
+
+
+MATRIX MATRIX MULTIPLICATION
+
+2x3       3x2
+|1 3 2|   |1 3|   |11 10|
+|4 0 1| X |0 1| = |9  14|
+          |5 2|
+
+|1 3 2|   |1|   |11|
+|4 0 1| X |0| = |9 |
+          |5|
+
+|1 3 2|   |3|   |10|
+|4 0 1| X |1| = |14|
+          |2|
+
+Example:
+
+House sizes:      Hypothesis: 
+2104              h(x) = -40 + 0.25x
+1416              h(x) = 200 + 0.1x
+1534              h(x) = -150 + 0.4x 
+852
+
+|1 2104|                    |486 410 692|
+|1 1416|   |-40 200 -150|   |314 342 416|
+|1 1534| x |0.25 0.1 0.4| = |344 353 464|
+|1 852 |                    |173 285 191|
+
+
+MATRIX MULTIPLICATION PROPERTIES
+
+Let A and B be matrices. Then in general, AxB <> BxA. (not commutative)
+Let A and B and C be matrices. AxBxC = Ax(BxC) = (AxB)xC. (associative)
+
+Identity Matrix 
+
+Denoted I (or Inxm)
+
+1x1
+|1|
+
+2x2
+|1 0|
+|0 1|
+
+3x3
+|1 0 0|
+|0 1 0|
+|0 0 1|
+
+For any matrix A, 
+A*I = I*A = A
+
+INVERSE AND TRANSPOSE
+
+Matrix inverse
+
+If A is an mxm matrix, and if it has an inverse,
+A*(A-1) = (A-1)*A = I
+
+Only square matrices (#rows = #columns) have inverse.
+Matrices that don't have an inverse are "singular" or "degenarate".
+
+Matrix Transpose
+
+A = |1 2 0|
+    |3 5 9|
+
+At = |1 3|
+     |2 5|
+     |0 9|
+
+Let A be an mxn matrix, and let B = At.
+Then B is an nxm matrix, and Bij = Aji.
